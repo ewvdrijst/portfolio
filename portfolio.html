@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunstportfolio - Wouter van der Rijst</title>
+    <style>
+       
+	body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #fff;
+        }
+
+        h1 {
+ 	    color: #1a365d; 
+            font-size: 24px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+	    text-align: center; 
+	    border-bottom: 2px solid #1a365d; 
+            padding-bottom: 10px;
+            margin-top: 60px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+   	    color: #1a365d; 
+            font-size: 1.3em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+  	    border-bottom: 1px solid #999; 
+	    padding-bottom: 5px; 
+            margin-top: 30px;
+        }
+
+        h3 { 
+	    color: #2c5282; 
+	    margin-top: 25px; 
+	    margin-bottom: 15px; 
+	    font-size: 1.15em; 
+	    border-left: 4px solid #2c5282; 
+	    padding-left: 10px; 
+	}
+
+        p { 
+	    margin: 5px 0 15px 0; 
+	    text-align: justify; 
+	}
+
+	.page-break {
+	    page-break-before: always; /* Voor oudere software */
+	    break-before: page;        /* Moderne standaard */
+	}
+
+        /* Styling voor de Inhoudsopgave */
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 12px;
+            font-weight: bold;
+        }
+
+        .toc-item::after {
+            content: " ";
+            flex-grow: 1;
+            border-bottom: 1px dotted #ccc;
+            margin: 0 10px;
+            position: relative;
+            top: -4px;
+        }
+
+	.toc-item a {
+	    color: inherit; /* Neemt de normale zwarte tekstkleur over */
+	    text-decoration: none; /* Haalt de onderstreping weg */
+	}
+
+	.toc-item a:hover {
+	    text-decoration: underline; /* Alleen onderstrepen als je er op de computer overheen hovert */
+	}
+
+	/* Dit geldt voor álle statussen: normaal, bezocht en als je erop klikt */
+	a,
+	.toc-item a, 
+	.toc-item a:visited, 
+	.toc-item a:active,
+	.toc-sublist li a,
+	.toc-sublist li a:visited,
+	.toc-sublist li a:active {
+	    color: #333 !important; /* Altijd netjes donkergrijs/zwart */
+	    text-decoration: none;  /* Geen onderstreping */
+	}
+
+	/* Alleen onderstrepen als je er met de muis overheen beweegt */
+	a:hover,
+	.toc-item a:hover,
+	.toc-sublist li a:hover {
+	    text-decoration: underline;
+	    color: #0066cc; /* Optioneel: subtiel blauw tijdens het hoveren */
+	}
+
+        .toc-page {
+            font-weight: bold;
+            flex-shrink: 0;
+	    margin-left: 1em;
+        }
+
+        .toc-sublist {
+            list-style: none;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .toc-sublist li {
+            font-style: italic;
+            color: #666;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+
+        /* Styling voor de Portfolio */
+	 .artwork-item { 
+	    margin-bottom: 40px; 
+	    page-break-inside: avoid; 
+	    padding-bottom: 20px; 
+	    border-bottom: 1px dashed #eee; 
+	}
+
+        .artwork-title { 
+	    font-size: 1.1em; 
+	    font-weight: bold; 
+	    color: #000; 
+	}
+
+        .meta { 
+	    font-style: italic; 
+	    color: #666; 
+	    font-size: 0.95em; 
+	    margin-bottom: 10px; 
+	    display: block; 
+	}
+
+        .sub-section { 
+		margin-left: 15px; 
+		font-style: italic; 
+		color: #444; 
+		margin-top: 20px; 
+	}
+
+        .artwork-img { 
+	    max-width: 100%; 
+	    max-height: 450px; 
+	    display: block; 
+	    margin: 15px auto 0 auto; 
+	    border: 1px solid #ccc; 
+	}
+
+	.artwork-row {
+	    display: flex;
+	    gap: 20px; /* Ruimte tussen de afbeeldingen */
+	    margin-bottom: 20px;
+	}
+
+	/* Dit zorgt ervoor dat de afbeeldingen netjes even groot worden */
+	.artwork-row .foto-box {
+	    flex: 1; /* Geef elk item evenveel ruimte */
+	    text-align: center; /* Zet de titel/onderschrift in het midden */
+	}
+
+	.foto-box, .artwork-item {
+	    background: #fafafa;
+	    padding: 10px;
+	    border: 1px solid #eee;
+	}
+
+	.artwork-row img {
+	    max-width: 100%; /* Voorkomt dat de foto buiten de pagina loopt */
+	    height: auto;    /* Behoudt de juiste verhoudingen */
+	    display: block;
+	    margin: 0 auto 10px auto; /* Centreert de foto en geeft ruimte onder */
+	}
+
+        .sub-section { 
+	    margin-left: 15px; 
+	    font-style: italic; 
+	    color: #444; 
+	    margin-top: 20px; 
+	}
+
+        /* Styling voor de Biografie */
+        .bio-text {
+            font-size: 16px;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .bio-section {
+            margin-bottom: 25px;
+        }
+
+        .bio-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bio-section li {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .bio-section strong.year {
+            display: inline-block;
+            width: 60px;
+            color: #111;
+        }
+
+        .contact-info strong {
+            display: inline-block;
+            width: 120px;
+            color: #555;
+        }
+
+        .contact-info a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+	@media screen {
+	    .foto-box, .artwork-item, .artwork-img { 
+        	box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+	    }
+	}
+
+	@media print {
+	    @page {
+        	size: A4 landscape; /* Verandert de hele PDF naar liggend */
+	        margin: 1.0cm;      /* Geeft een mooie, rustige witmarge rondom */
+        
+        	/* Je automatische paginanummers blijven hieronder gewoon perfect werken */
+		@bottom-right {
+		    content: "Pagina " counter(page) " van " counter(pages);
+	            font-family: 'Helvetica Neue', Arial, sans-serif;
+        	    font-size: 11px;
+	            color: #666;
+        	}
+	    }
+	}
+    </style>
+</head>
+<body>
+
+    <h1>KUNSTPORTFOLIO</h1>
+    <p style="text-align: center; font-size: 1.3em; font-weight: bold; margin-bottom: 5px;">Wouter van der Rijst</p>
+    <p style="text-align: center; font-size: 1.1em; color: #555; margin-top: 0;">Beeldend Kunstenaar &amp; Graficus</p>
+    <p style="text-align: center; font-size: 0.9em;" class="meta">Catalogus en Artist Statement (Editie 2026)</p>
+
+    <div class="page-break"></div>
+
+    <!-- ================= INHOUDSOPGAVE ================= -->
+    <section id="inhoudsopgave">
+        <h1>Inhoudsopgave</h1>
+        
+        <ul class="toc-list">
+            <li class="toc-item">
+		    <span><a href="#statement">Artist Statement</a></span>
+                <span class="toc-page">4</span>
+            </li>
+            
+            <h2>Catalogus van Kunstwerken</h2>
+            
+            <li class="toc-item">
+		<span><a href="#landschappen">1. Landschappen &amp; Maritiem</a></span>
+                <span class="toc-page">5</span>
+            </li>
+            <ul class="toc-sublist">
+		<li><a href="#paalhoofden">Paalhoofden (2026)</a></li>
+                <li><a href="#basalt">Basalt in de Branding (2026)</a></li>
+                <li><a href="#storm">De Storm tegemoet (2022)</a></li>
+                <li><a href="#rijders">Rijders op de dijk (2024)</a></li>
+            </ul>
+
+            <li class="toc-item">
+                <span><a href="#dieren">2. Dieren</a></span>
+                <span class="toc-page">9</span>
+            </li>
+            <ul class="toc-sublist">
+                <li><a href="#middagrust">Middagrust (2024)</a></li>
+                <li><a href="#vrouw_kat">Vrouw met kat (2025)</a></li>
+                <li><a href="#knul_vlek">Knul en Vlek (2025)</a></li>
+                <li><a href="#katten_vlakken">Katten in Vlakken (2024)</a></li>
+                <li><a href="#uiltje">Uiltje (2023)</a></li>
+                <li><a href="#prachtelfje">Prachtelfje / Fairywren (2026)</a></li>
+            </ul>
+
+            <li class="toc-item">
+                <span><a href="#stillevens">3. Stillevens</a></span>
+                <span class="toc-page">15</span>
+            </li>
+            <ul class="toc-sublist">
+                <li><a href="#kinderschoentjes">Kinderschoentjes (2026)</a></li>
+                <li><a href="#narcissen">Narcissen in de zon (2026)</a></li>
+                <li><a href="#stootwillen">Stootwillen op de wal (2024)</a></li>
+            </ul>
+
+            <li class="toc-item">
+                <span><a href="#portretten">4. Portretten &amp; Lijnstudies</a></span>
+                <span class="toc-page">18</span>
+            </li>
+            <ul class="toc-sublist">
+                <li><a href="#ouders">Mijn ouders (2026)</a></li>
+                <li><a href="#oude_man">Buste van een oude man (2026)</a></li>
+                <li><a href="#zelfportret">Zelfportret I &amp; II (2023)</a></li>
+                <li><a href="#collage">Collage van Alien (2024)</a></li>
+                <li><a href="#karikatuur">Karikatuur van mijn vader (2022)</a></li>
+                <li><a href="#lijnstudie_1">Zelfportret - Lijnstudie (2023)</a></li>
+                <li><a href="#lijnstudie_2">Zelfportret - Lijnstudie (2026)</a></li>
+            </ul>
+
+            <li class="toc-item">
+                <span><a href="#architectuur">5. Architectuur &amp; Interieur</a></span>
+                <span class="toc-page">25</span>
+            </li>
+            <ul class="toc-sublist">
+                <li><a href="#tuin_terneuzen">Tuin in Terneuzen (2026)</a></li>
+                <li><a href="#huis_koewacht">Huis in Koewacht (2024)</a></li>
+                <li><a href="#bubbel">In een bubbel (2024)</a></li>
+                <li><a href="#oude_poort">Oude poort met klimop (2024)</a></li>
+            </ul>
+
+            <li class="toc-item">
+                <span><a href="#analyse">Kritische Analyse Portfolio</a></span>
+                <span class="toc-page">29</span>
+            </li>
+
+            <li class="toc-item">
+		    <span><a href="#biografie">Biografie &amp; Contact</a></span>
+                <span class="toc-page">34</span>
+            </li>
+        </ul>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- ================= PORTFOLIO ================= -->
+    <section id="portfolio">
+        <h2 id="statement">ARTIST STATEMENT</h2>
+	
+        <p>Als beeldend kunstenaar werk ik als autodidact vanuit een onafhankelijke en diepe fascinatie voor de sfeer van het alledaagse en de monumentale rust van de natuur. Mijn praktijk is gevormd buiten de traditionele academische kaders; ze is organisch ontstaan uit jaren van intensieve observatie, experiment en een pure toewijding aan het klassieke en moderne schildersambacht. Mijn portfolio beweegt zich hierdoor vloeiend en onbevangen tussen de weidsheid van het maritieme landschap en de intieme leefwereld dichtbij. Of ik nu de getijdenkracht van de zee vang in olieverf, een landschap balanceer in aquarel, of een karakteristiek gezicht vertaal naar een monochrome linosnede; mijn zoektocht blijft gericht op de autonome bezieling en de karakteristieke kracht van het onderwerp.</p>
+        <p>Een belangrijk en geliefd motief binnen mijn werk is de dierenwereld. Van de natuurlijke gratie, de verstilde slaaphoudingen en de eigenwijze rust van katten tot de karakteristieke blik van een uil of de dynamiek van een zingende vogel op een tak; dieren vormen een rode draad door mijn oeuvre. Ik zie het als een voortdurende uitdaging om deze onderwerpen telkens in een andere beeldtaal te onderzoeken: de ene keer teder en vloeibaar in aquarel, de andere keer juist met de rijke, trefzekere textuur en de fijne details van olieverf, of met een krachtig, expressionistisch contrast tegen een vlammend rode achtergrond</p>
+	<p>Geleid door een eigenzinnig, analyserend oog hanteer ik een expressieve, gelaagde werkwijze waarbij ik de wetten van de camera bewust loslaat. Ik zoek niet naar een gladde kopie van de werkelijkheid, maar naar een doorleefde interpretatie in vorm en kleur. Door te spelen met scherpe licht-donkercontrasten (chiaroscuro) en uitgesproken slagschaduwen breng ik drama en diepte aan op het vlak. Elk werk — of het nu gaat om monumentale paalhoofden aan de horizon of een slapende kat op de voorgrond — is een bewuste en zelfontwikkelde oefening in vereenvoudiging: het wegsnoeien van ruis om de pure essentie en de emotionele lading van het moment over te houden.</p>
+
+        <div class="page-break"></div>
+
+        <h2>CATALOGUS VAN KUNSTWERKEN</h2>
+
+        <h3 id="landschappen">1. Landschappen &amp; Maritiem</h3>
+    
+        <div class="artwork-item" id="paalhoofden">
+            <span class="artwork-title">Paalhoofden (in uitvoering)</span>
+            <span class="meta">Olieverf op doek | 150 x 80 cm | In uitvoering (Augustus 2026)</span>
+            <img class="artwork-img" src="../Paalhoofden/IMG_5630.adjusted.png" alt="Paalhoofden">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="basalt">
+            <span class="artwork-title">Basalt in de Branding (2026)</span>
+            <span class="meta">Pastel op aquarelpapier (Ingelijst) | 12 x 30 cm | Mei 2026</span>
+            <img class="artwork-img" src="../landschap/IMG_5511.adjusted.png" alt="Basalt in de Branding">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="storm">
+            <span class="artwork-title">De Storm tegemoet (2022)</span>
+            <span class="meta">Aquarel op papier | 13 x 38 cm</span>
+            <img class="artwork-img" src="../landschap/looming storm.png" alt="De Storm tegemoet">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="rijders">
+            <span class="artwork-title">Rijders op de dijk (2024)</span>
+            <span class="meta">Aquarel op papier | 13 x 17 cm | Juli 2024</span>
+            <img class="artwork-img" src="../landschap/Three Riders.JPEG" alt="Rijders op de dijk">
+        </div>
+
+        <div class="page-break"></div>
+
+        <h3 id="dieren">2. Dieren</h3>
+
+        <div class="artwork-item" id="middagrust">
+            <span class="artwork-title">Middagrust (2024)</span>
+            <span class="meta">Aquarel op papier (Ingelijst) | 26 x 17,6 cm | Augustus 2024</span>
+            <img class="artwork-img" src="../dieren/Katten/Knul en Vlek/Middagrust.adjusted.png" alt="Middagrust">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="vrouw_kat">
+            <span class="artwork-title">Vrouw met kat (2025)</span>
+            <span class="meta">Acryl op paneel (Ingelijst) | 30 x 22,5 cm | Begin 2025</span>
+            <img class="artwork-img" src="../vrouw met kat/IMG_4827.adjusted.png" alt="Vrouw met kat">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="knul_vlek">
+            <span class="artwork-title">Knul en Vlek (2025)</span>
+            <span class="meta">Acryl op doek | 50 x 40 cm | Maart 2025</span>
+            <img class="artwork-img" src="../dieren/Katten/Knul en Vlek/IMG_5664.adjusted.png" alt="Knul en Vlek">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="katten_vlakken">
+            <span class="artwork-title">Katten in Vlakken (2024)</span>
+            <span class="meta">Digitale studie (GIMP) | Variabel | Juli 2024</span>
+            <img class="artwork-img" src="../dieren/Katten/Knul en Vlek/een test.png" alt="Katten in Vlakken">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="uiltje">
+            <span class="artwork-title">Uiltje (2023)</span>
+            <span class="meta">Aquarel op aquarelpapier | 13 x 11 cm | Juni 2023</span>
+            <img class="artwork-img" src="../dieren/Vogels/Uil/uiltje.jpeg" alt="Uiltje">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="prachtelfje">
+            <span class="artwork-title">Prachtelfje (2026)</span>
+            <span class="meta">Olieverf op doek | 21 x 30 cm | Maart 2026</span>
+            <img class="artwork-img" src="../dieren/Vogels/fairywren/signal-2026-03-11-115713.adjusted.png" alt="Fairywren">
+        </div>
+
+        <div class="page-break"></div>
+
+        <h3 id="stillevens">3. Stillevens</h3>
+
+        <div class="artwork-item" id="kinderschoentjes">
+            <span class="artwork-title">Kinderschoentjes (2026)</span>
+            <span class="meta">Acryl op paneel | 25 x 25 cm | Februari 2026</span>
+            <img class="artwork-img" src="../schoenen/IMG_4942.adjusted.png" alt="Kinderschoentjes">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="narcissen">
+            <span class="artwork-title">Narcissen in de zon (2026)</span>
+            <span class="meta">Acryl op paneel | 25 x 25 cm | Juni 2026</span>
+            <img class="artwork-img" src="../Narcissen/IMG_5419.adjusted.png" alt="Narcissen in de zon">
+        </div>
+ 
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="stootwillen">
+            <span class="artwork-title">Stootwillen op de wal (2024)</span>
+            <span class="meta">Aquarel op papier | 12,5 x 18 cm | September 2024</span>
+            <img class="artwork-img" src="../landschap/signal-2026-08-25-173151.jpeg" alt="Stootwillen op de wal">
+        </div>
+
+	<!--  <div class="page-break"></div> -->
+
+        <h3 id="portretten">4. Portretten &amp; Lijnstudies</h3>
+
+        <div class="artwork-item" id="ouders">
+            <span class="artwork-title">Mijn ouders (in uitvoering)</span>
+            <span class="meta">GIMP grafische voorstudie (voor linosnede) | A5-ontwerp | Augustus 2026</span>
+	    <div class="artwork-row">
+	        <div class="foto-box">
+            	    <img class="artwork-img" src="../Lino/alien_linosnede.png" alt="Mijn moeder - GIMP grafische voorstudie">
+        	    <p><em>Mijn moeder (2026)</em><br>GIMP grafische voorstudie | A5</p>
+	        </div>
+
+		<div class="foto-box">
+	            <img class="artwork-img" src="../Lino/evert_linosnede.png" alt="Mijn vader - GIMP grafische voorstudie">
+        	    <p><em>Mijn vader (2026)</em><br>GIMP grafische voorstudie | A5</p>
+		</div>
+	    </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="oude_man">
+            <span class="artwork-title">Buste van een oude man (2026)</span>
+            <span class="meta">Olieverf op oliepapier | 20 x 33 cm | Mei 2026</span>
+            <img class="artwork-img" src="../Beeld van Oude Man/IMG_5503.adjusted.png" alt="Buste van een oude man">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="zelfportret">
+            <span class="artwork-title">Zelfportret I &amp; II (2023)</span>
+            <span class="meta">Aquarel op aquarelpapier | 27 x 35 cm</span>
+	    <div class="artwork-row">
+	        <div class="foto-box">
+            	    <img class="artwork-img" src="../portretten/Wouter/IMG_3265.JPEG" alt="Zelfportret I">
+        	    <p><em>Zelfportret I (2023)</em></p>
+	        </div>
+
+		<div class="foto-box">
+	            <img class="artwork-img" src="../portretten/Wouter/IMG_3398.JPEG" alt="Zelfportret II">
+        	    <p><em>Zelfportret II (2023)</em></p>
+		</div>
+	    </div>
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="collage">
+            <span class="artwork-title">Collage van Alien (2024)</span>
+            <span class="meta">Mixed media en aquarel op papier | 27 x 35 cm | 2024</span>
+            <img class="artwork-img" src="../portretten/Alien/collage-alien.png" alt="Collage van Alien">
+        </div>
+
+        <div class="page-break"></div>
+
+        <h4 class="sub-section">Sub-sectie: Lijnstudies &amp; Anatomie</h4>
+
+        <div class="artwork-item" id="karikatuur">
+            <span class="artwork-title">Karikatuur van mijn vader (2022)</span>
+            <span class="meta">Pen op papier | 10 x 15 cm | Medio 2022</span>
+            <img class="artwork-img" src="../portretten/Evert/evert.karikatuur.jpg" alt="Karikatuur van mijn vader">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="lijnstudie_1">
+            <span class="artwork-title">Zelfportret - Lijnstudie (2023)</span>
+            <span class="meta">Potlood op papier | 15 x 21 cm | Medio 2023</span>
+            <img class="artwork-img" src="../portretten/Wouter/IMG_5612.jpg" alt="Zelfportret Lijnstudie 2023">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="lijnstudie_2">
+            <span class="artwork-title">Zelfportret - Lijnstudie (2026)</span>
+            <span class="meta">Potlood op papier | 18 x 26 cm | Februari 2026</span>
+            <img class="artwork-img" src="../portretten/Wouter/IMG_5636.JPEG" alt="Zelfportret Lijnstudie 2026">
+        </div>
+
+        <div class="page-break"></div>
+
+        <h3 id="architectuur">5. Architectuur &amp; Interieur</h3>
+
+        <div class="artwork-item" id="tuin_terneuzen">
+            <span class="artwork-title">Tuin in Terneuzen (2026)</span>
+            <span class="meta">Mixed media op papier | 28 x 21 cm | Februari 2026</span>
+            <img class="artwork-img" src="../landschap/IMG_5637.JPEG" alt="Tuin in Terneuzen">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="huis_koewacht">
+            <span class="artwork-title">Huis in Koewacht (2024)</span>
+            <span class="meta">Aquarel op papier | 18 x 12 cm | Mei 2024</span>
+            <img class="artwork-img" src="../landschap/huis in koewacht.png" alt="Huis in Koewacht">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="oude_poort">
+            <span class="artwork-title">Oude poort met klimop (2024)</span>
+            <span class="meta">Aquarel op papier | 18 x 12 cm | Mei 2024</span>
+            <img class="artwork-img" src="../landschap/IMG_5662.jpg" alt="Oude poort met klimop">
+        </div>
+
+        <div class="page-break"></div>
+
+        <div class="artwork-item" id="bubbel">
+            <span class="artwork-title">In een bubbel (2024)</span>
+            <span class="meta">Aquarel op papier | 36 x 50 cm | Medio 2024</span>
+            <img class="artwork-img" src="../portretten/IMG_5634.adjusted.png" alt="In een bubbel">
+        </div>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- ================= KRITISCHE ANALYSE ================= -->
+    <section id="analyse">
+        <h1>Kritische Analyse Portfolio</h1>
+        <p style="color: #666; font-size: 14px; font-style: italic; margin-bottom: 30px;">
+            Wouter van der Rijst — Beeldend Kunstenaar & Graficus (Editie 2026)
+        </p>
+        
+        <p>
+            Hieronder volgt een professionele en eerlijke doorlichting van het samengestelde portfolio (Editie 2026). Deze analyse legt de nadruk op de artistieke handtekening, de technische beheersing en de blinde vlekken die als springplank kunnen dienen voor verdere groei richting exposities.
+        </p>
+
+        <p>
+            Gevormd buiten de traditionele academische kaders, toont dit oeuvre een opmerkelijk autonome ontwikkeling. Het feit dat de kunstenaar zijn praktijk als autodidact heeft opgebouwd, vertaalt zich in een onbevangenheid die zeldzaam is binnen het institutionele circuit. De rode draad binnen dit werk bevindt zich op het vitale spanningsveld tussen een zelfontwikkelde, strakke analytische systematiek en een rauwe, expressieve bezieling.
+        </p>
+
+        <!-- 1. LANDSCHAPPEN -->
+        <div class="no-split" style="margin-top: 40px;">
+            <h2>1. Landschappen & Maritiem</h2>
+            <p>
+                Dit hoofdstuk vormt de conceptuele ankerplaats van het portfolio. Het ademt een diepe, authentieke verbondenheid met de Zeeuwse elementen, de klei en de getijden.
+            </p>
+            
+            <h3><a href="#paalhoofden" style="color: inherit; text-decoration: underline;">Paalhoofden</a> (Olieverf op doek)</h3>
+            <p>
+                <strong>Sterk punt:</strong> Visueel en monumentaal het absolute topstuk van de catalogus. Het werk dwingt direct respect af door de ambitieuze schaal (150x80 cm). De perspectivische opzet slaagt er feilloos in om de kijker onverbiddelijk mee de horizon in te trekken.
+            </p>
+            <p>
+                <strong>Kritiek / Advies:</strong> Er luidt een waarschuwing voor visuele leegte in de grote vlakken. De kunstenaar dient er zorg voor te dragen dat de opvolgende verflagen in de lucht en het water genoeg subtiele kleurwrevingen en textuur krijgen, zodat het werk in een grote expositieruimte blijft vibreren.
+            </p>
+
+            <h3><a href="#basalt" style="color: inherit; text-decoration: underline;">Basalt in de Branding</a> &amp; <a href="#storm" style="color: inherit; text-decoration: underline;">De Storm tegemoet</a></h3>
+            <p>
+                <strong>Sterk punt:</strong> Twee ijzersterke oefeningen in maritiem minimalisme. De reductie van de horizon en de branding tot hun absolute essentie slaagt hier volkomen, mede door het krachtige gebruik van het getinte aquarelpapier.
+            </p>
+            <p>
+                <strong>Kritiek / Advies:</strong> Bij <a href="#storm" style="color: inherit; text-decoration: underline;">De Storm tegemoet</a> staat het eenzame schip exact in het geometrische midden. Dit haalt een deel van de inherente spanning en dynamiek uit de compositie. Het is raadzaam voor de kunstenaar om in de toekomst expressiever te spelen met asymmetrie.
+            </p>
+        </div>
+
+        <!-- 2. DIEREN -->
+        <div class="no-split" style="margin-top: 40px;">
+            <h2>2. Dieren</h2>
+            <p>
+                Dit segment getuigt van een enorme technische flexibiliteit en toont de kunstenaar op zijn meest dynamische vlak.
+            </p>
+
+            <h3><a href="#knul_vlek" style="color: inherit; text-decoration: underline;">Knul en Vlek</a> (Acryl op doek)</h3>
+            <p>
+                <strong>Sterk punt:</strong> Een baken van durf en expressie. Het brave realisme is hier volledig losgelaten ten gunste van een rauwe, expressionistische benadering met krachtige, vlammende contrasten tegen een dieprode achtergrond. De nieuwe daglichtfotografie bewijst hoe belangrijk een matte, glansvrije registratie is voor de impact van dit werk.
+            </p>
+            <p>
+                <strong>Kritiek / Advies:</strong> Dit werk staat stilistisch haaks op de tedere, gewassen aquarellen zoals <a href="#middagrust" style="color: inherit; text-decoration: underline;">Middagrust</a>. Deze spanning is interessant, maar vereist dat de kunstenaar in een expositiesetting heel bewust kiest hoe hij deze twee uitersten (het zachte versus het rauwe) met elkaar laat communiceren.
+            </p>
+
+            <h3><a href="#prachtelfje" style="color: inherit; text-decoration: underline;">Prachtelfje</a> (Olieverf op doek)</h3>
+            <p>
+                <strong>Sterk punt:</strong> Een esthetisch zeer geslaagde en technisch uiterst trefzekere vogelstudie. Nu de storende taperanden digitaal zijn verwijderd, danst de penseelstreek en het felle blauw optimaal over het canvas.
+            </p>
+            <p>
+                <strong>Kritiek / Advies:</strong> Hoewel ambachtelijk perfect, mist dit werk door zijn traditionele opzet een beetje de autonome, rauwe Zeeuwse eigenzinnigheid die de rest van het portfolio zo uniek maakt. Het leunt iets te veel op de esthetiek van de groepssetting waarin het ontstond.
+            </p>
+        </div>
+
+        <!-- 3. STILLEVENS -->
+        <div class="no-split" style="margin-top: 40px;">
+            <h2>3. Stillevens</h2>
+            <p>
+                Een categorie waarin alledaagse objecten door meesterlijk licht- en schaduwbeheer worden verheven tot poëtische monumenten.
+            </p>
+
+            <h3><a href="#narcissen" style="color: inherit; text-decoration: underline;">Narcissen in de zon</a> &amp; <a href="#kinderschoentjes" style="color: inherit; text-decoration: underline;">Kinderschoentjes</a> (Acryl op paneel)</h3>
+            <p>
+                <strong>Sterk punt:</strong> Twee absolute parels op een strak, vierkant formaat. De slagschaduw bij de narcissen is magistraal geplaatst en ademt de theatrale, melancholische dramatiek van Edward Hopper. Het toont hoe de maker het alledaagse weet te verheffen tot iets mysterieus.
+            </p>
+            <p>
+                <strong>Kritiek / Advies:</strong> De kunstenaar moet waken voor de expressiviteit en textuur van de achtergrond bij de <a href="#kinderschoentjes" style="color: inherit; text-decoration: underline;">Kinderschoentjes</a>; deze mag niet gaan concurreren met de breekbaarheid en verfijning van het hoofdonderwerp.
+            </p>
+        </div>
+
+        <!-- 4. PORTRETTEN & LIJNSTUDIES -->
+        <div class="no-split" style="margin-top: 40px;">
+            <h2>4. Portretten & Lijnstudies</h2>
+            <p>
+                Dit segment legt het pure, ongezouten anatomische ambacht bloot.
+            </p>
+
+            <h3><a href="#oude_man" style="color: inherit; text-decoration: underline;">Buste van een oude man</a> (Olieverf op oliepapier)</h3>
+            <p>
+                <strong>Sterk punt:</strong> Schilderkunstig het meest volwassen en indringende werk uit de catalogus. Het diepe <em>chiaroscuro</em> (licht-donkercontrast) en de doorleefde, roestbruine tonaliteit roepen associaties op met vroege meesters en Lucian Freud. Nu het trapeze-effect en de witte randen via GIMP zijn gecorrigeerd, spat de psychologische diepgang ongefilterd van het papier af.
+            </p>
+            <p>
+                <strong>Kritiek / Advies:</strong> De lat ligt hiermee extreem hoog. De uitdaging voor de kunstenaar is om deze intense psychologische spanning en rijke verftextuur ook vast te houden wanneer hij deze buste vertaalt naar een monochrome grafische linosnede.
+            </p>
+
+            <h3>Zelfportret - Lijnstudies &amp; GIMP-voorstudies</h3>
+            <p>
+                <strong>Sterk punt:</strong> De minimalistische potloodstudies en karikaturen tonen een vlijmscherp, analytisch oog. Met een absoluut minimum aan lijnen wordt direct de essentie van een karakter gevangen. De digitale GIMP-voorstudies (zoals de portretten van <a href="#ouders" style="color: inherit; text-decoration: underline;">Mijn ouders</a>) bewijzen een sterke en moderne progressie in strak, grafisch vlakdenken.
+            </p>
+        </div>
+
+        <!-- 5. ARCHITECTUUR & INTERIEUR -->
+        <div class="no-split" style="margin-top: 40px;">
+            <h2>5. Architectuur & Interieur</h2>
+            <p>
+                Deze categorie was voorheen de blinde vlek van het portfolio, maar is door de recente uitbreidingen en de herindeling uitgegroeid tot een volwaardige en evenwichtige pijler van het oeuvre.
+            </p>
+
+            <h3><a href="#oude_poort" style="color: inherit; text-decoration: underline;">Oude poort met klimop</a> (Aquarel op papier)</h3>
+            <p>
+                <strong>Sterk punt:</strong> Een fantastische toevoeging die de broodnodige body en sfeer naar deze discipline brengt. De prachtige, gelaagde wassingen en de diepe schaduwpartij onder de dakrand vangen perfect de doorleefde, historische sfeer van Zeeuwse bouwwerken.
+            </p>
+            <p>
+                <strong>Kritiek / Advies:</strong> De compositie leunt nu erg op de romantische sfeer van de illustratieve lijn. Om deze serie nog krachtiger te maken, zou de kunstenaar in een volgend werk de architectuur nóg monumentaler en abstracter mogen benaderen, in lijn met de strakke vlakverdeling die in de grafische studies zichtbaar is.
+            </p>
+        </div>
+
+        <!-- CONCLUSIE -->
+        <div class="no-split" style="margin-top: 50px; background-color: #fdfdfd; padding: 20px; border-left: 3px solid #333;">
+            <h3>Algemene Conclusie & Artistiek Recept</h3>
+            <p>
+                    De artistieke handtekening van <strong>Wouter van der Rijst</strong> is in deze editie van het portfolio overduidelijk gedefinieerd. Zijn absolute kracht ligt daar waar de <strong>strakke, analytische vorm</strong> (de perspectieflijn, de GIMP-vector, de linosnedegrens) en de <strong>losse, emotionele bezieling</strong> (de vloeibare aquarel, het vette oliepastel, de doorleefde olieverftoets) elkaar ontmoeten.
+            </p>
+            <p>
+                Het vasthouden van deze unieke synthese bij het voltooien van de <em>Paalhoofden</em> en het snijden van de nieuwe linosnedes is het kernadvies. De kunstenaar heeft hiermee een uiterst herkenbaar, coherent en tentoonstellings-waardig oeuvre in handen!
+            </p>
+        </div>
+    </section>
+
+    <div class="page-break"></div>
+
+    <!-- ================= BIOGRAFIE ================= -->
+    <section id="biografie">
+        <h1>Biografie</h1>
+        
+        <p class="bio-text">
+            <strong>Wouter van der Rijst (1972)</strong> is een Zeeuwse beeldend kunstenaar en graficus. In zijn werk staat de gelaagde interpretatie van de werkelijkheid centraal. Gevormd door de weidsheid van het Zeeuwse landschap en een scherp oog voor het intieme en alledaagse, ontwikkelt hij een herkenbare beeldtaal waarin strakke grafische lijnen en expressieve, emotionele verfstreken elkaar ontmoeten.
+        </p>
+        <p class="bio-text">
+            Zijn technische veelzijdigheid uit zich in het vloeiend wisselen tussen olieverf, aquarel, acryl en monochrome linosnedes. Vanuit zijn atelier werkt hij continu aan het vereenvoudigen van de vorm, om zo de pure essentie en de bezieling van zijn onderwerpen — variërend van monumentale maritieme landschappen tot verstilde dierstudies — bloot te leggen.
+        </p>
+
+        <div class="bio-section">
+            <h2>Exposities &amp; Projecten (Selectie)</h2>
+            <ul>
+                <li><strong class="year">2026</strong> | <em>Paalhoofden-serie</em>, Atelier-expositie / Groepsexpositie [Locatie invullen]</li>
+                <li><strong class="year">2025</strong> | <em>Dier en Dynamiek</em>, [Naam galerie of kunstroute invullen]</li>
+                <li><strong class="year">2024</strong> | <em>Digitale Grafiek &amp; Lijnstudies</em>, [Naam project of online platform invullen]</li>
+            </ul>
+        </div>
+
+        <div class="bio-section">
+            <h2>Opleiding &amp; Vorming</h2>
+            <ul>
+                <li>[Jaartal] – [Jaartal] | [Eventuele kunstopleiding, academie of relevante cursussen/groepssessies invullen]</li>
+                <li>Lid van [Eventuele kunstenaarsvereniging of collectief invullen]</li>
+            </ul>
+        </div>
+
+        <div class="bio-section contact-info">
+            <h2>Contact &amp; Info</h2>
+            <ul>
+                <li><strong>Website:</strong> <a href="http://woutervanderrijst.nl" target="_blank">www.woutervanderrijst.nl</a></li>
+                <li><strong>E-mail:</strong> <a href="mailto:info@woutervanderrijst.nl">info@woutervanderrijst.nl</a></li>
+                <li><strong>Instagram:</strong> <a href="https://instagram.com" target="_blank">@wouter_vanderrijst_art</a></li>
+                <li><strong>Atelieradres:</strong> [Straatnaam, Woonplaats]</li>
+            </ul>
+        </div>
+    </section>
+
+</body>
+</html>
+
